@@ -1,0 +1,162 @@
+body
+{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: 'Courier New', Courier, monospace;
+}
+svg
+{
+    height: 30px;
+    width: 30px;
+    fill: #7DC2A5;
+}
+.header
+{
+    height: 100px;
+    display: flex;
+    padding: 30px 200px;
+    justify-content: space-between;
+    align-items: center;
+}
+.header .title
+{
+    font-size: 24px;
+}
+.main
+{
+    flex-grow: 1;
+    background-color: #F1F1D3;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 200px;
+}
+.main .sup
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+.main .inf
+{
+    flex: 1;
+}
+.formContainer
+{
+    display: flex;
+    padding: 15px;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    width: 300px;
+    background-color: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+}
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+form
+{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+.formTitle
+{
+    font-size: 20px;
+    font-weight: bold;
+}
+form .read
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.grille{
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    gap: 15px;
+}
+.livre
+{
+    height: 100%;
+    padding: 30px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.livre > *
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.footer
+{
+    height: 50px;
+    background-color: #F1F1D3;
+}
+.footer .content
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn, button {
+  background-color: #C7DDC5;         
+  color: white;                      
+  border: none;                      
+  border-radius: 8px;                
+  padding: 0.75em 1.5em;             
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 
+    background-color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+}
+
+.btn:hover, button:hover {
+  background-color: #C7DDC5;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active, button:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.read.no{
+    background-color: #F79F95;
+}
+.read.no:hover
+{
+    background-color: #F79F95;
+}
+.remove
+{
+    background-color: #0594D0;
+}
+.remove:hover
+{
+    background-color: #0594D0;
+}
