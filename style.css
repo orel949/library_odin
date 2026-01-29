@@ -70,6 +70,10 @@ form
     justify-content: center;
     align-items: center;
 }
+input
+{
+    padding: 5px;
+}
 .formTitle
 {
     font-size: 20px;

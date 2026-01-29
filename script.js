@@ -1,12 +1,23 @@
 const myLibrary = [];
 const grille = document.querySelector('.grille');
-function Book(title, author, pages,read) 
-{
-    this.id = crypto.randomUUID();
-    this.title=title;
-    this.author=author;
-    this.pages=pages;
-    this.read=read;
+class Book{
+    #id;
+    constructor(title,author,pages,read)
+    {
+        this.#id = crypto.randomUUID();
+        this.title=title;
+        this.author=author;
+        this.pages=pages;
+        this.read=read;
+    }
+    getId()
+    {
+        return this.#id;
+    }
+    toggleRead()
+    {
+        this.read=!this.read;
+    }
 };
 function addBookToLibrary(title,author,pages,read)
 {
@@ -20,7 +31,7 @@ function loopTab (tab)
     {
         let livre = document.createElement('div');
         livre.classList.add('livre');
-        livre.dataset.id=tab[i].id;
+        livre.dataset.id=tab[i].getId();
         let author = document.createElement('div');
         let title = document.createElement('div');
         let pages = document.createElement('div');
@@ -28,7 +39,8 @@ function loopTab (tab)
         read.classList.add('btn', 'read');
         const remove = document.createElement('div');
         remove.classList.add('btn', 'remove');
-        remove.dataset.id=tab[i].id;
+        remove.dataset.id=tab[i].getId();
+        read.dataset.id=tab[i].getId();
         author.textContent = tab[i].author;
         title.textContent=tab[i].title;
         pages.textContent=tab[i].pages;
@@ -74,19 +86,27 @@ function deleteBook(tab,id)
 {
     for (let i=0;i<tab.length;i++)
     {
-        if (id == tab[i].id)
+        if (id == tab[i].getId())
         {
             tab.splice(i,1);
         }
     }
 };
-let removeBtn = document.querySelector('.remove');
+function changeRead(tab,id)
+{
+    for (let i=0;i<tab.length;i++)
+    {
+        if (id == tab[i].getId())
+        {
+            tab[i].toggleRead();
+        }
+    }
+};
 grille.addEventListener('click', (event)=>{
+    let num = event.target.dataset.id;
     if (event.target.classList.contains('remove'))
     {
-        let num = event.target.dataset.id;
         deleteBook(myLibrary, num);
-        console.log(num);
         loopTab(myLibrary);
     }
     if (event.target.classList.contains('read'))
@@ -95,11 +115,13 @@ grille.addEventListener('click', (event)=>{
         {
             event.target.textContent="not read yet";
             event.target.classList.add('no');
+            changeRead(myLibrary,num);
         }
         else
         {
             event.target.textContent="read";
             event.target.classList.remove('no');
+            changeRead(myLibrary,num);
         }
     }
 });
