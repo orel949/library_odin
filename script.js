@@ -66,22 +66,77 @@ const formBtn = document.querySelector('.formBtn');
 const dialog = document.querySelector('dialog');
 formBtn.addEventListener('click', ()=>{
     dialog.showModal();
+    validationForm();
 });
 const subBtn = document.getElementById('subBtn');
-subBtn.addEventListener('click',()=>
+function validationForm()
 {
+    const titre = document.getElementById('title');
+    const auteur = document.getElementById('author');
+    const pages = document.getElementById('pages');
     const form = document.querySelector('form');
-    const formData = new FormData(form);
-    const title = formData.get('title');
-    const author = formData.get('author');
-    const pages = formData.get('pages');
-    const readCheckBox = document.querySelector('input[type="checkbox"]');
-    const read = readCheckBox.checked;
-    addBookToLibrary(title,author,pages,read);
-    form.reset();
-    loopTab(myLibrary);
-    dialog.close();
-});
+    titre.addEventListener('input', ()=>
+    {
+        titre.setCustomValidity("");
+        if(!titre.checkValidity())
+        {
+            titre.setCustomValidity("The title must be filled!");
+            titre.reportValidity();
+        }
+    })
+    auteur.addEventListener('input', ()=>
+    {
+        auteur.setCustomValidity("");
+        if (!auteur.checkValidity())
+        {
+            auteur.setCustomValidity("The author name must be filled!");
+            auteur.reportValidity();
+        }
+    })
+    pages.addEventListener('input', ()=>
+    {
+        pages.setCustomValidity("");
+        if (!pages.checkValidity())
+        {
+            pages.setCustomValidity("The pages number must be filled!");
+            pages.reportValidity();
+        }
+    })
+    subBtn.addEventListener('click',()=>
+    {
+        titre.setCustomValidity("");
+        auteur.setCustomValidity("");
+        pages.setCustomValidity("");
+        if (!pages.checkValidity())
+        {
+            pages.setCustomValidity("The pages number must be filled!");
+            pages.reportValidity();
+        }
+        if (!auteur.checkValidity())
+        {
+            auteur.setCustomValidity("The author name must be filled!");
+            auteur.reportValidity();
+        }
+        if(!titre.checkValidity())
+        {
+            titre.setCustomValidity("The title must be filled!");
+            titre.reportValidity();
+        }
+        if (titre.checkValidity() && auteur.checkValidity() && pages.checkValidity())
+        {
+            const formData = new FormData(form);
+            const title = formData.get('title');
+            const author = formData.get('author');
+            const page = formData.get('pages');
+            const readCheckBox = document.querySelector('input[type="checkbox"]');
+            const read = readCheckBox.checked;
+            addBookToLibrary(title,author,page,read);
+            form.reset();
+            loopTab(myLibrary);
+            dialog.close();
+        }
+    })
+}
 function deleteBook(tab,id)
 {
     for (let i=0;i<tab.length;i++)
